@@ -1,5 +1,11 @@
 # Bundul Due Payments
 
+![Tests](https://img.shields.io/badge/tests-56%20passing-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)
+![React Native](https://img.shields.io/badge/React%20Native-0.81-61dafb)
+![Expo](https://img.shields.io/badge/Expo-54.0-000020)
+
 A React Native mobile application for viewing and managing upcoming subscription payments. Built with Expo and TypeScript, this app provides a clean and intuitive interface for tracking payment due dates with urgency indicators.
 
 ## 📱 Features
@@ -201,7 +207,3 @@ Jonathan Williams
 ## 🙏 Acknowledgments
 
 Built as part of the Bundul Frontend Engineer Assessment.
-
----
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
