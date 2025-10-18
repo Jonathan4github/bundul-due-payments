@@ -1,5 +1,5 @@
-import { Payment, PaymentStatus, PaymentWithStatus } from '../types/payment.types';
-import { getDaysUntilDate, isOverdue, isDueSoon } from './dateUtils';
+import { Payment, PaymentStatus } from '../types/payment.types';
+import { isOverdue, isDueSoon } from './dateUtils';
 
 /**
  * Payment processing and sorting utilities
@@ -20,20 +20,6 @@ export const getPaymentStatus = (dueDate: string): PaymentStatus => {
   }
 
   return PaymentStatus.UPCOMING;
-};
-
-/**
- * Add status information to a payment
- * @param payment - Payment object
- * @returns Payment with status
- */
-export const addPaymentStatus = (payment: Payment): PaymentWithStatus => {
-
-  return {
-    ...payment,
-    status: getPaymentStatus(payment.dueDate),
-    daysUntilDue: getDaysUntilDate(payment.dueDate),
-  };
 };
 
 /**
@@ -59,20 +45,6 @@ export const sortPaymentsByDueDate = (payments: Payment[]): Payment[] => {
 export const calculateTotalDue = (payments: Payment[]): number => {
 
   return payments.reduce((total, payment) => total + payment.amount, 0);
-};
-
-/**
- * Filter payments by status
- * @param payments - Array of payments
- * @param status - Payment status to filter by
- * @returns Filtered array of payments
- */
-export const filterPaymentsByStatus = (
-  payments: Payment[],
-  status: PaymentStatus
-): Payment[] => {
-
-  return payments.filter(payment => getPaymentStatus(payment.dueDate) === status);
 };
 
 /**
