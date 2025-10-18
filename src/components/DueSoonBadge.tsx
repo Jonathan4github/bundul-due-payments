@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Text, StyleSheet, Animated } from 'react-native';
+import { colors } from '../constants/colors';
 
 interface DueSoonBadgeProps {
   animated?: boolean;
@@ -43,13 +44,13 @@ const DueSoonBadge: React.FC<DueSoonBadgeProps> = ({ animated = true }) => {
 
 const styles = StyleSheet.create({
   badge: {
-    backgroundColor: '#EF4444',
+    backgroundColor: colors.badge.background,
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 12,
   },
   badgeText: {
-    color: '#ffffff',
+    color: colors.badge.text,
     fontSize: 12,
     fontWeight: '600',
   },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import DuePaymentsScreen from './src/screens/DuePaymentsScreen';
+import { colors } from './src/constants/colors';
 
 export default function App() {
   return (
@@ -13,6 +14,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: colors.background.main,
   },
 });
