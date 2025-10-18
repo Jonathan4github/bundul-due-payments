@@ -11,6 +11,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { Payment } from '../types/payment.types';
 import { usePayments } from '../hooks/usePayments';
+import { colors } from '../constants/colors';
 import PaymentCard from '../components/PaymentCard';
 import TotalDueHeader from '../components/TotalDueHeader';
 
@@ -81,7 +82,7 @@ const DuePaymentsScreen: React.FC = () => {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#3B82F6" />
+        <ActivityIndicator size="large" color={colors.primary} />
         <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
@@ -135,8 +136,8 @@ const DuePaymentsScreen: React.FC = () => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            colors={['#3B82F6']}
-            tintColor="#3B82F6"
+            colors={[colors.primary]}
+            tintColor={colors.primary}
           />
         }
       />
@@ -147,13 +148,13 @@ const DuePaymentsScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: colors.background.main,
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F3F4F6',
+    backgroundColor: colors.background.main,
   },
   listContent: {
     paddingBottom: 24,
@@ -161,17 +162,17 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 12,
     fontSize: 16,
-    color: '#6B7280',
+    color: colors.text.secondary,
   },
   errorText: {
     fontSize: 16,
-    color: '#EF4444',
+    color: colors.error,
     textAlign: 'center',
     paddingHorizontal: 24,
   },
   emptyText: {
     fontSize: 18,
-    color: '#6B7280',
+    color: colors.text.secondary,
   },
 });
 

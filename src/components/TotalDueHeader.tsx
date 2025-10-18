@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { formatCurrency } from '../utils/currencyUtils';
+import { colors } from '../constants/colors';
 
 interface TotalDueHeaderProps {
   totalAmount: number;
@@ -45,12 +46,12 @@ const TotalDueHeader: React.FC<TotalDueHeaderProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#3B82F6',
+    backgroundColor: colors.header.background,
     padding: 24,
     alignItems: 'center',
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
-    shadowColor: '#000',
+    shadowColor: colors.shadow.color,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
@@ -58,49 +59,49 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: '#BFDBFE',
+    color: colors.header.subtext,
     marginBottom: 8,
   },
   amount: {
     fontSize: 42,
     fontWeight: '700',
-    color: '#ffffff',
+    color: colors.header.text,
     marginBottom: 4,
   },
   count: {
     fontSize: 14,
-    color: '#BFDBFE',
+    color: colors.header.subtext,
   },
   urgentContainer: {
     marginTop: 16,
     width: '100%',
   },
   urgentBadge: {
-    backgroundColor: 'rgba(239, 68, 68, 0.15)',
+    backgroundColor: colors.background.urgentBadge,
     borderRadius: 12,
     padding: 12,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
     borderWidth: 1,
-    borderColor: 'rgba(239, 68, 68, 0.3)',
+    borderColor: colors.border.urgentBadge,
   },
   urgentIcon: {
     fontSize: 24,
   },
   urgentLabel: {
     fontSize: 12,
-    color: '#FEE2E2',
+    color: colors.text.lightRed,
     fontWeight: '600',
   },
   urgentAmount: {
     fontSize: 18,
-    color: '#ffffff',
+    color: colors.text.white,
     fontWeight: '700',
   },
   urgentCount: {
     fontSize: 12,
-    color: '#FEE2E2',
+    color: colors.text.lightRed,
     marginLeft: 'auto',
   },
 });

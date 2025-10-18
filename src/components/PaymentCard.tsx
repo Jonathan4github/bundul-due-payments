@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Payment } from '../types/payment.types';
 import { formatDate, isDueSoon } from '../utils/dateUtils';
 import { formatCurrency } from '../utils/currencyUtils';
+import { colors } from '../constants/colors';
 import DueSoonBadge from './DueSoonBadge';
 
 interface PaymentCardProps {
@@ -71,21 +72,21 @@ const PaymentCard: React.FC<PaymentCardProps> = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.background.card,
     borderRadius: 12,
     padding: 16,
     marginHorizontal: 16,
     marginVertical: 8,
-    shadowColor: '#000',
+    shadowColor: colors.shadow.color,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
   },
   urgentCard: {
-    backgroundColor: '#FFF5F5',
+    backgroundColor: colors.background.urgent,
     borderLeftWidth: 4,
-    borderLeftColor: '#EF4444',
+    borderLeftColor: colors.border.urgent,
   },
   header: {
     flexDirection: 'row',
@@ -108,11 +109,11 @@ const styles = StyleSheet.create({
   serviceName: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1F2937',
+    color: colors.text.primary,
   },
   category: {
     fontSize: 12,
-    color: '#6B7280',
+    color: colors.text.secondary,
     marginTop: 2,
   },
   details: {
@@ -125,16 +126,16 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: '#6B7280',
+    color: colors.text.secondary,
   },
   amount: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#059669',
+    color: colors.amount.text,
   },
   dueDate: {
     fontSize: 14,
-    color: '#1F2937',
+    color: colors.text.primary,
   },
   actions: {
     flexDirection: 'row',
@@ -142,25 +143,25 @@ const styles = StyleSheet.create({
   },
   payNowButton: {
     flex: 1,
-    backgroundColor: '#3B82F6',
+    backgroundColor: colors.button.primary,
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',
   },
   payNowButtonText: {
-    color: '#ffffff',
+    color: colors.button.primaryText,
     fontSize: 14,
     fontWeight: '600',
   },
   payLaterButton: {
     flex: 1,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: colors.button.secondary,
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',
   },
   payLaterButtonText: {
-    color: '#4B5563',
+    color: colors.button.secondaryText,
     fontSize: 14,
     fontWeight: '600',
   },
