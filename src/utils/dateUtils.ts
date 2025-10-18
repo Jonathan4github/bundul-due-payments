@@ -38,12 +38,12 @@ export const getDaysUntilDate = (dateString: string): number => {
 /**
  * Check if a payment is due soon (within 3 days)
  * @param dateString - ISO date string (YYYY-MM-DD)
- * @returns True if due within 3 days
+ * @returns True if due within 3 days (0-2 days away)
  */
 export const isDueSoon = (dateString: string): boolean => {
   const daysUntil = getDaysUntilDate(dateString);
 
-  return daysUntil >= 0 && daysUntil <= 3;
+  return daysUntil >= 0 && daysUntil < 3;
 };
 
 /**
