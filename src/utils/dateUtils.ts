@@ -55,22 +55,3 @@ export const isOverdue = (dateString: string): boolean => {
 
   return getDaysUntilDate(dateString) < 0;
 };
-
-/**
- * Get a human-readable relative date string
- * @param dateString - ISO date string (YYYY-MM-DD)
- * @returns Relative date string (e.g., "Due today", "Due in 3 days", "Overdue by 2 days")
- */
-export const getRelativeDateString = (dateString: string): string => {
-  const days = getDaysUntilDate(dateString);
-
-  if (days < 0) {
-    return `Overdue by ${Math.abs(days)} day${Math.abs(days) === 1 ? '' : 's'}`;
-  } else if (days === 0) {
-    return 'Due today';
-  } else if (days === 1) {
-    return 'Due tomorrow';
-  } else {
-    return `Due in ${days} days`;
-  }
-};
