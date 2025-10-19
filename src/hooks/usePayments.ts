@@ -5,6 +5,7 @@ import {
   sortPaymentsByDueDate,
   calculateTotalDue,
   getUrgentPayments,
+  getOverduePayments,
 } from '../utils/paymentUtils';
 
 /**
@@ -61,6 +62,16 @@ export const usePayments = () => {
   );
   const urgentCount = urgentPayments.length;
 
+  /**
+   * Get overdue payments and calculate overdue amount
+   */
+  const overduePayments = useMemo(() => getOverduePayments(payments), [payments]);
+  const overdueDue = useMemo(
+    () => calculateTotalDue(overduePayments),
+    [overduePayments]
+  );
+  const overdueCount = overduePayments.length;
+
   // Initial fetch
   useEffect(() => {
     fetchPayments();
@@ -74,6 +85,8 @@ export const usePayments = () => {
     totalDue,
     urgentDue,
     urgentCount,
+    overdueDue,
+    overdueCount,
     onRefresh,
   };
 };

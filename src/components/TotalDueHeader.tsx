@@ -2,12 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { formatCurrency } from '../utils/currencyUtils';
 import { colors } from '../constants/colors';
+import StatusBadge from './StatusBadge';
 
 interface TotalDueHeaderProps {
   totalAmount: number;
   urgentAmount: number;
   paymentCount: number;
   urgentCount: number;
+  overdueAmount: number;
+  overdueCount: number;
 }
 
 const TotalDueHeader: React.FC<TotalDueHeaderProps> = ({
@@ -15,6 +18,8 @@ const TotalDueHeader: React.FC<TotalDueHeaderProps> = ({
   urgentAmount,
   paymentCount,
   urgentCount,
+  overdueAmount,
+  overdueCount,
 }) => {
   return (
     <View
@@ -28,21 +33,32 @@ const TotalDueHeader: React.FC<TotalDueHeaderProps> = ({
         {paymentCount} {paymentCount === 1 ? 'payment' : 'payments'}
       </Text>
 
+      {overdueCount > 0 && (
+        <StatusBadge
+          icon="🔴"
+          iconLabel="Overdue"
+          label="Overdue"
+          amount={overdueAmount}
+          count={overdueCount}
+          badgeStyle={styles.overdueBadge}
+          labelStyle={styles.overdueLabel}
+          amountStyle={styles.overdueAmount}
+          countStyle={styles.overdueCount}
+        />
+      )}
+
       {urgentCount > 0 && (
-        <View style={styles.urgentContainer}>
-          <View style={styles.urgentBadge}>
-            <Text style={styles.urgentIcon} accessibilityLabel="Warning">⚠️</Text>
-            <View>
-              <Text style={styles.urgentLabel}>Due Soon</Text>
-              <Text style={styles.urgentAmount}>
-                {formatCurrency(urgentAmount)}
-              </Text>
-            </View>
-            <Text style={styles.urgentCount}>
-              {urgentCount} {urgentCount === 1 ? 'payment' : 'payments'}
-            </Text>
-          </View>
-        </View>
+        <StatusBadge
+          icon="⚠️"
+          iconLabel="Warning"
+          label="Due Soon"
+          amount={urgentAmount}
+          count={urgentCount}
+          badgeStyle={styles.urgentBadge}
+          labelStyle={styles.urgentLabel}
+          amountStyle={styles.urgentAmount}
+          countStyle={styles.urgentCount}
+        />
       )}
     </View>
   );
@@ -76,37 +92,31 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.header.subtext,
   },
-  urgentContainer: {
-    marginTop: 16,
-    width: '100%',
-  },
   urgentBadge: {
     backgroundColor: colors.background.urgentBadge,
-    borderRadius: 12,
-    padding: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    borderWidth: 1,
     borderColor: colors.border.urgentBadge,
   },
-  urgentIcon: {
-    fontSize: 24,
-  },
   urgentLabel: {
-    fontSize: 12,
     color: colors.text.lightRed,
-    fontWeight: '600',
   },
   urgentAmount: {
-    fontSize: 18,
     color: colors.text.white,
-    fontWeight: '700',
   },
   urgentCount: {
-    fontSize: 12,
     color: colors.text.lightRed,
-    marginLeft: 'auto',
+  },
+  overdueBadge: {
+    backgroundColor: colors.error,
+    borderColor: colors.error,
+  },
+  overdueLabel: {
+    color: colors.text.white,
+  },
+  overdueAmount: {
+    color: colors.text.white,
+  },
+  overdueCount: {
+    color: colors.text.white,
   },
 });
 

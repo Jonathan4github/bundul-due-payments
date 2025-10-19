@@ -1,7 +1,7 @@
 # Bundul Due Payments
 
-![Tests](https://img.shields.io/badge/tests-56%20passing-brightgreen)
-![Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen)
+![Tests](https://img.shields.io/badge/tests-109%20passing-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-94.92%25-brightgreen)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)
 ![React Native](https://img.shields.io/badge/React%20Native-0.81-61dafb)
 ![Expo](https://img.shields.io/badge/Expo-54.0-000020)
@@ -11,13 +11,13 @@ A React Native mobile application for viewing and managing upcoming subscription
 ## 📱 Features
 
 - **Payment Dashboard** - View all upcoming subscription payments in one place
-- **Smart Sorting** - Payments automatically sorted by due date (soonest first)
-- **Urgency Indicators** - "Due Soon" badges for payments due within 3 days
+- **Smart Sorting** - Payments prioritized by status (Overdue → Due Soon → Upcoming)
+- **Overdue Alerts** - "Overdue" badges for past-due payments with darker red border
+- **Urgency Indicators** - "Due Soon" badges with pulse animation for payments due within 3 days
 - **Urgent Highlighting** - Light red background for payments requiring immediate attention
 - **Total Overview** - See total amount due and breakdown of urgent payments at a glance
 - **Pull-to-Refresh** - Swipe down to reload payment data
 - **Payment Actions** - "Pay Now" and "Pay Later" options with confirmation modals
-- **Animated Badges** - Subtle pulse animation on urgent payment indicators
 - **Responsive Design** - Clean UI that works across different screen sizes
 
 ## 🛠 Tech Stack
@@ -94,11 +94,21 @@ npm run test:watch
 npm run test:coverage
 ```
 
-**Test Coverage:** The project includes 56 comprehensive tests covering:
-- Date utility functions
-- Currency formatting
-- Payment calculations and sorting
-- Component rendering and interactions
+**Test Coverage:** The project includes 109 comprehensive tests with 94.92% overall coverage:
+- **Utility Tests (95.74% coverage)**:
+  - Date formatting and calculations (89.47% coverage)
+  - Currency formatting (100% coverage)
+  - Payment sorting, filtering, and calculations (100% coverage)
+- **Component Tests (100% coverage)**:
+  - PaymentCard rendering and interactions (100% coverage)
+  - DueSoonBadge animations (100% coverage)
+  - StatusBadge rendering and styling (100% coverage)
+  - TotalDueHeader display logic with overdue and urgent badges (100% coverage)
+  - ErrorBoundary error handling (100% coverage)
+- **Screen Tests (85.71% coverage)**:
+  - DuePaymentsScreen states and interactions
+- **Hook Tests (94.11% coverage)**:
+  - usePayments data fetching, sorting, and state management
 
 ## 📁 Project Structure
 
@@ -108,7 +118,9 @@ bundul-due-payments/
 │   ├── components/          # Reusable UI components
 │   │   ├── PaymentCard.tsx
 │   │   ├── DueSoonBadge.tsx
-│   │   └── TotalDueHeader.tsx
+│   │   ├── StatusBadge.tsx
+│   │   ├── TotalDueHeader.tsx
+│   │   └── ErrorBoundary.tsx
 │   ├── screens/             # Main app screens
 │   │   └── DuePaymentsScreen.tsx
 │   ├── utils/               # Helper functions
@@ -120,13 +132,19 @@ bundul-due-payments/
 │   ├── types/               # TypeScript type definitions
 │   │   └── payment.types.ts
 │   ├── constants/           # App constants
+│   │   ├── colors.ts
 │   │   └── mockData.ts
 │   └── __tests__/           # Test files
 │       ├── dateUtils.test.ts
 │       ├── currencyUtils.test.ts
 │       ├── paymentUtils.test.ts
 │       ├── PaymentCard.test.tsx
-│       └── DueSoonBadge.test.tsx
+│       ├── DueSoonBadge.test.tsx
+│       ├── StatusBadge.test.tsx
+│       ├── TotalDueHeader.test.tsx
+│       ├── DuePaymentsScreen.test.tsx
+│       ├── usePayments.test.ts
+│       └── ErrorBoundary.test.tsx
 ├── App.tsx                  # Root component
 ├── package.json
 ├── tsconfig.json
@@ -137,9 +155,9 @@ bundul-due-payments/
 ## 🎯 Key Implementation Details
 
 ### Payment Urgency Logic
+- **Overdue**: Past due date - shown with "Overdue" badge and darker red border
 - **Due Soon**: Payments due within 0-2 days from today
 - **Upcoming**: Payments due 3+ days from today
-- **Overdue**: Past due date (not shown in current mock data)
 
 ### Custom Hooks
 - **`usePayments()`**: Manages payment data fetching, sorting, and refresh state
@@ -155,7 +173,11 @@ bundul-due-payments/
 - **Modular Components**: Each component is self-contained and reusable
 - **Pure Functions**: Utility functions are side-effect free for easy testing
 - **Custom Hooks**: Business logic separated from UI components
-- **Comprehensive Testing**: Unit and component tests for reliability
+- **Error Boundaries**: Graceful error handling with user-friendly fallback UI
+- **Performance Optimization**: React.memo and useCallback for optimal rendering
+- **Accessibility**: WCAG-compliant labels and roles for screen readers
+- **Centralized Theming**: Color constants for consistent design system
+- **Comprehensive Testing**: 109 tests with 94.92% coverage for reliability
 
 ## 📝 Mock Data
 

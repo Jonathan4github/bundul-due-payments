@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Payment } from '../types/payment.types';
-import { formatDate, isDueSoon } from '../utils/dateUtils';
+import { formatDate, isDueSoon, isOverdue } from '../utils/dateUtils';
 import { formatCurrency } from '../utils/currencyUtils';
 import { colors } from '../constants/colors';
 import DueSoonBadge from './DueSoonBadge';
@@ -17,13 +17,21 @@ const PaymentCard: React.FC<PaymentCardProps> = React.memo(({
   onPayNow,
   onPayLater,
 }) => {
+  const paymentIsOverdue = isOverdue(payment.dueDate);
   const isUrgent = isDueSoon(payment.dueDate);
+
+  // Determine card style based on payment status
+  const cardStyle = paymentIsOverdue
+    ? styles.overdueCard
+    : isUrgent
+    ? styles.urgentCard
+    : styles.card;
 
   return (
     <View
-      style={[styles.card, isUrgent && styles.urgentCard]}
+      style={[styles.card, cardStyle]}
       testID={`payment-card-${payment.id}`}
-      accessibilityLabel={`Payment for ${payment.service}, amount ${formatCurrency(payment.amount)}, due ${formatDate(payment.dueDate)}`}
+      accessibilityLabel={`Payment for ${payment.service}, amount ${formatCurrency(payment.amount)}, due ${formatDate(payment.dueDate)}${paymentIsOverdue ? ', overdue' : ''}`}
     >
       <View style={styles.header}>
         <View style={styles.serviceInfo}>
@@ -35,7 +43,11 @@ const PaymentCard: React.FC<PaymentCardProps> = React.memo(({
             )}
           </View>
         </View>
-        {isUrgent && <DueSoonBadge />}
+        {paymentIsOverdue ? (
+          <DueSoonBadge text="Overdue" />
+        ) : isUrgent ? (
+          <DueSoonBadge />
+        ) : null}
       </View>
 
       <View style={styles.details}>
@@ -94,6 +106,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background.urgent,
     borderLeftWidth: 4,
     borderLeftColor: colors.border.urgent,
+  },
+  overdueCard: {
+    backgroundColor: colors.background.urgent,
+    borderWidth: 2,
+    borderColor: colors.error,
   },
   header: {
     flexDirection: 'row',
