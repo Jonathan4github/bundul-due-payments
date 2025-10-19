@@ -17,7 +17,11 @@ const TotalDueHeader: React.FC<TotalDueHeaderProps> = ({
   urgentCount,
 }) => {
   return (
-    <View style={styles.container} testID="total-due-header">
+    <View
+      style={styles.container}
+      testID="total-due-header"
+      accessibilityLabel={`Total due: ${formatCurrency(totalAmount)} for ${paymentCount} ${paymentCount === 1 ? 'payment' : 'payments'}${urgentCount > 0 ? `. ${urgentCount} urgent ${urgentCount === 1 ? 'payment' : 'payments'} due soon` : ''}`}
+    >
       <Text style={styles.label}>Total Due</Text>
       <Text style={styles.amount}>{formatCurrency(totalAmount)}</Text>
       <Text style={styles.count}>
@@ -27,7 +31,7 @@ const TotalDueHeader: React.FC<TotalDueHeaderProps> = ({
       {urgentCount > 0 && (
         <View style={styles.urgentContainer}>
           <View style={styles.urgentBadge}>
-            <Text style={styles.urgentIcon}>⚠️</Text>
+            <Text style={styles.urgentIcon} accessibilityLabel="Warning">⚠️</Text>
             <View>
               <Text style={styles.urgentLabel}>Due Soon</Text>
               <Text style={styles.urgentAmount}>
