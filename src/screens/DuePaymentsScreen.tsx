@@ -24,6 +24,8 @@ const DuePaymentsScreen: React.FC = () => {
     totalDue,
     urgentDue,
     urgentCount,
+    overdueDue,
+    overdueCount,
     onRefresh,
   } = usePayments();
   const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
@@ -129,6 +131,8 @@ const DuePaymentsScreen: React.FC = () => {
             urgentAmount={urgentDue}
             paymentCount={payments.length}
             urgentCount={urgentCount}
+            overdueAmount={overdueDue}
+            overdueCount={overdueCount}
           />
         }
         contentContainerStyle={styles.listContent}

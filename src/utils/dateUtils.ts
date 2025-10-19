@@ -52,6 +52,16 @@ export const isDueSoon = (dateString: string): boolean => {
  * @returns True if past due date
  */
 export const isOverdue = (dateString: string): boolean => {
-
   return getDaysUntilDate(dateString) < 0;
+};
+
+/**
+ * Get the number of days a payment is overdue
+ * @param dateString - ISO date string (YYYY-MM-DD)
+ * @returns Number of days overdue (positive number), or 0 if not overdue
+ */
+export const getDaysOverdue = (dateString: string): number => {
+  const daysUntil = getDaysUntilDate(dateString);
+
+  return daysUntil < 0 ? Math.abs(daysUntil) : 0;
 };

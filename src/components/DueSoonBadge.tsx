@@ -4,9 +4,13 @@ import { colors } from '../constants/colors';
 
 interface DueSoonBadgeProps {
   animated?: boolean;
+  text?: string;
 }
 
-const DueSoonBadge: React.FC<DueSoonBadgeProps> = ({ animated = true }) => {
+const DueSoonBadge: React.FC<DueSoonBadgeProps> = ({
+  animated = true,
+  text = 'Due Soon'
+}) => {
   const pulseAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -29,6 +33,10 @@ const DueSoonBadge: React.FC<DueSoonBadgeProps> = ({ animated = true }) => {
     }
   }, [animated, pulseAnim]);
 
+  const accessibilityText = text === 'Overdue'
+    ? 'Payment is overdue'
+    : 'Payment due soon';
+
   return (
     <Animated.View
       style={[
@@ -36,10 +44,10 @@ const DueSoonBadge: React.FC<DueSoonBadgeProps> = ({ animated = true }) => {
         animated && { transform: [{ scale: pulseAnim }] },
       ]}
       testID="due-soon-badge"
-      accessibilityLabel="Payment due soon"
+      accessibilityLabel={accessibilityText}
       accessibilityRole="text"
     >
-      <Text style={styles.badgeText}>Due Soon</Text>
+      <Text style={styles.badgeText}>{text}</Text>
     </Animated.View>
   );
 };

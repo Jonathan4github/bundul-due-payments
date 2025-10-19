@@ -9,7 +9,7 @@ export const MOCK_PAYMENTS: Payment[] = [
     id: 1,
     service: 'Netflix',
     amount: 14.99,
-    dueDate: '2025-10-19',
+    dueDate: '2025-10-15',
     category: 'Entertainment',
     color: '#E50914',
     icon: '🎬',
