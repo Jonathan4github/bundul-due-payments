@@ -36,6 +36,8 @@ const DueSoonBadge: React.FC<DueSoonBadgeProps> = ({ animated = true }) => {
         animated && { transform: [{ scale: pulseAnim }] },
       ]}
       testID="due-soon-badge"
+      accessibilityLabel="Payment due soon"
+      accessibilityRole="text"
     >
       <Text style={styles.badgeText}>Due Soon</Text>
     </Animated.View>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   FlatList,
@@ -31,7 +31,7 @@ const DuePaymentsScreen: React.FC = () => {
   /**
    * Handle Pay Now action
    */
-  const handlePayNow = (payment: Payment) => {
+  const handlePayNow = useCallback((payment: Payment) => {
     setSelectedPayment(payment);
     Alert.alert(
       'Payment Confirmation',
@@ -55,12 +55,12 @@ const DuePaymentsScreen: React.FC = () => {
         },
       ]
     );
-  };
+  }, []);
 
   /**
    * Handle Pay Later action (Bonus feature)
    */
-  const handlePayLater = (payment: Payment) => {
+  const handlePayLater = useCallback((payment: Payment) => {
     Alert.alert(
       'Payment Reminder',
       `Set a reminder to pay ${payment.service} later?`,
@@ -74,14 +74,14 @@ const DuePaymentsScreen: React.FC = () => {
         },
       ]
     );
-  };
+  }, []);
 
   /**
    * Render loading state
    */
   if (loading) {
     return (
-      <View style={styles.centerContainer}>
+      <View style={styles.centerContainer} accessibilityLabel="Loading payments">
         <ActivityIndicator size="large" color={colors.primary} />
         <Text style={styles.loadingText}>Loading...</Text>
       </View>
@@ -93,8 +93,8 @@ const DuePaymentsScreen: React.FC = () => {
    */
   if (error) {
     return (
-      <View style={styles.centerContainer}>
-        <Text style={styles.errorText}>❌ {error}</Text>
+      <View style={styles.centerContainer} accessibilityLabel="Error loading payments">
+        <Text style={styles.errorText} accessibilityRole="alert">❌ {error}</Text>
       </View>
     );
   }
@@ -104,7 +104,7 @@ const DuePaymentsScreen: React.FC = () => {
    */
   if (payments.length === 0) {
     return (
-      <View style={styles.centerContainer}>
+      <View style={styles.centerContainer} accessibilityLabel="No payments due">
         <Text style={styles.emptyText}>🎉 No payments due!</Text>
       </View>
     );
@@ -138,8 +138,10 @@ const DuePaymentsScreen: React.FC = () => {
             onRefresh={onRefresh}
             colors={[colors.primary]}
             tintColor={colors.primary}
+            accessibilityLabel="Pull to refresh payments"
           />
         }
+        accessibilityLabel="Payment list"
       />
     </View>
   );

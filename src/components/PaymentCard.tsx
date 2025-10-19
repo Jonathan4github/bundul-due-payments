@@ -12,7 +12,7 @@ interface PaymentCardProps {
   onPayLater?: (payment: Payment) => void;
 }
 
-const PaymentCard: React.FC<PaymentCardProps> = ({
+const PaymentCard: React.FC<PaymentCardProps> = React.memo(({
   payment,
   onPayNow,
   onPayLater,
@@ -23,6 +23,7 @@ const PaymentCard: React.FC<PaymentCardProps> = ({
     <View
       style={[styles.card, isUrgent && styles.urgentCard]}
       testID={`payment-card-${payment.id}`}
+      accessibilityLabel={`Payment for ${payment.service}, amount ${formatCurrency(payment.amount)}, due ${formatDate(payment.dueDate)}`}
     >
       <View style={styles.header}>
         <View style={styles.serviceInfo}>
@@ -53,6 +54,8 @@ const PaymentCard: React.FC<PaymentCardProps> = ({
           style={styles.payNowButton}
           onPress={() => onPayNow(payment)}
           testID={`pay-now-button-${payment.id}`}
+          accessibilityLabel={`Pay now for ${payment.service}`}
+          accessibilityRole="button"
         >
           <Text style={styles.payNowButtonText}>Pay Now</Text>
         </TouchableOpacity>
@@ -61,6 +64,8 @@ const PaymentCard: React.FC<PaymentCardProps> = ({
             style={styles.payLaterButton}
             onPress={() => onPayLater(payment)}
             testID={`pay-later-button-${payment.id}`}
+            accessibilityLabel={`Pay later for ${payment.service}`}
+            accessibilityRole="button"
           >
             <Text style={styles.payLaterButtonText}>Pay Later</Text>
           </TouchableOpacity>
@@ -68,7 +73,9 @@ const PaymentCard: React.FC<PaymentCardProps> = ({
       </View>
     </View>
   );
-};
+});
+
+PaymentCard.displayName = 'PaymentCard';
 
 const styles = StyleSheet.create({
   card: {
