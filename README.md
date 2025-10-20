@@ -44,7 +44,7 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/bundul-due-payments.git
+git clone https://github.com/Jonathan4github/bundul-due-payments.git
 cd bundul-due-payments
 ```
 
